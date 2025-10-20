@@ -1,0 +1,22 @@
+name: Pipeline atividade unipe
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  
+  workflow_dispatch: {}
+
+jobs:
+  validar-hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout do código
+        uses: actions/checkout@v4
+      
+      - name: 2. Listar os arquivos
+        run: ls -R
+        
+      - name: 3. Mensagem de sucesso
+        run: echo "Pipeline executada com sucesso para a atividade!"
