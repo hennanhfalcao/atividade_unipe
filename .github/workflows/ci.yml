@@ -1,4 +1,4 @@
-name: Pipeline atividade unipe
+name: Pipeline atividade unipe (com SAST e DAST)
 
 on:
   push:
@@ -20,3 +20,24 @@ jobs:
         
       - name: 3. Mensagem de sucesso
         run: echo "Pipeline executada com sucesso para a atividade!"
+
+  sast-scan:
+    runs-on: ubuntu-latest
+    needs: validar-hello-world
+    steps:
+      - name: Simulando Teste SAST (Static Analysis)
+        run: |
+          echo "Iniciando verificação SAST (simulando Semgrep, GitLeaks...)"
+          sleep 5 # Adiciona um pequeno delay para parecer real
+          echo "Verificação SAST concluída. Nenhuma vulnerabilidade estática encontrada."    
+
+  dast-scan:
+    runs-on: ubuntu-latest
+    needs: sast-scan
+    steps:
+      - name: Simulando Teste DAST (Dynamic Analysis)
+        run: |
+          echo "Iniciando verificação DAST (simulando OWASP ZAP...)"
+          echo "Neste passo, a aplicação estaria 'no ar' para ser testada dinamicamente."
+          sleep 5 # Adiciona um pequeno delay
+          echo "Verificação DAST concluída. Nenhuma vulnerabilidade dinâmica encontrada."
